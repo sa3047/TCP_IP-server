@@ -10,8 +10,8 @@ except socket.error, msg:
  
 print 'Socket Created'
  
-host = '192.168.56.1'
-port = 1080
+host = str(sys.argv[1]) #'192.168.56.1'
+port = int(sys.argv[2]) #1080
  
 try:
     remote_ip = socket.gethostbyname( host )
@@ -29,8 +29,8 @@ s.connect((remote_ip , port))
 print 'Socket Connected to ' + host + ' on ip ' + remote_ip
  
 #Send some data to remote server
-#message = "GET helloworld.html HTTP/1.1\r\n\r\n"
-message = "GET /helloworld.html HTTP/1.1" 
+message = "GET /helloworld.html HTTP/1.1\r\n\r\n"
+#message = "GET /helloworld.html HTTP/1.1" 
 try :
     #Set the whole string
     s.sendall(message)
@@ -45,7 +45,8 @@ reply = s.recv(4096)
  
 print 'Reply from python server  ' + reply
 
-for i in range(0, len(reply)):
-	print(reply[i])
+
+'''for i in range(0, len(reply)):
+	print(reply[i])'''
 	
 s.close()
